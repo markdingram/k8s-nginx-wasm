@@ -1,0 +1,20 @@
+nameOverride: ingress-nginx
+
+controller:
+  image:
+    repository: null
+    image: nginx
+    digest: null
+    tag: wasm
+  extraArgs:
+    v: "2"
+  hostPort:
+    enabled: true
+  service:
+    type: "NodePort"
+  nodeSelector:
+    ingress-ready: "true"
+  tolerations:
+  - key: "node-role.kubernetes.io/master"
+    operator: "Equal"
+    effect: "NoSchedule"
