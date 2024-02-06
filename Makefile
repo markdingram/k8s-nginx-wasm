@@ -5,7 +5,7 @@ all: nginx cluster ingress app
 
 .PHONY: nginx
 nginx: ingress/rust/target/wasm32-wasi/release/proxy_wasm_example_http_headers.wasm
-	cd ingress && docker build . --tag nginx:wasm
+	cd ingress && docker build . --tag registry.k8s.io/ingress-nginx/controller:1.9.5-wasm
 
 ingress/rust/target/wasm32-wasi/release/proxy_wasm_example_http_headers.wasm:
 	cd ingress/rust && rustup target add wasm32-wasi && cargo build --target wasm32-wasi --release
@@ -14,7 +14,7 @@ ingress/rust/target/wasm32-wasi/release/proxy_wasm_example_http_headers.wasm:
 .PHONY: cluster
 cluster:
 	kind create cluster --config cluster.yaml
-	kind load docker-image nginx:wasm
+	kind load docker-image registry.k8s.io/ingress-nginx/controller:1.9.5-wasm
 
 
 .PHONY: ingress

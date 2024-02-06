@@ -3,9 +3,9 @@ nameOverride: ingress-nginx
 controller:
   image:
     repository: null
-    image: nginx
+    image: ingress-nginx/controller
     digest: null
-    tag: wasm
+    tag: 1.9.5-wasm
   extraArgs:
     v: "2"
   hostPort:
@@ -18,3 +18,10 @@ controller:
   - key: "node-role.kubernetes.io/master"
     operator: "Equal"
     effect: "NoSchedule"
+  config:
+    main-snippet: |
+      wasm {
+        module http_headers /plugins/proxy_wasm_example_http_headers.wasm;
+      }
+    location-snippet: |
+      proxy_wasm http_headers;

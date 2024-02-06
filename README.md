@@ -1,8 +1,10 @@
-# Kube Nginx Experiments
+# Ingress NGINX Controller (WASM) example
 
-Starts a Kind Cluster & install Ingress Nginx + Kuard to test adding extensions to Nginx
+PoC running WASM inside NGINX Ingress Controller.
 
 ## Setup
+
+- Follow <https://github.com/markdingram/ingress-nginx/commit/0ccdc763ed4c417066f3953eaf94ffeb0279e0da> to build a local Ingress NGINX container with WASM support
 
 - Install Kind, Rust, Helm etc
 
@@ -19,9 +21,5 @@ Starts a Kind Cluster & install Ingress Nginx + Kuard to test adding extensions 
 - http://kind.internal/ should show the `kuard` page
 
 
+- Check for header `Hello_wasm: 1` !
 
-## Extensions 
-
-- Lua
-- Wasm (via https://github.com/Kong/ngx_wasm_module/blob/main/docs/INSTALL.md#build-examples)
-- ?

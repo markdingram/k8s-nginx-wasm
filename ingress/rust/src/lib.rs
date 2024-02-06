@@ -43,6 +43,8 @@ impl Context for HttpHeaders {}
 
 impl HttpContext for HttpHeaders {
     fn on_http_request_headers(&mut self, _: usize, _: bool) -> Action {
+        self.add_http_request_header("hello_wasm", "1");
+
         for (name, value) in &self.get_http_request_headers() {
             info!("#{} -> {}: {}", self.context_id, name, value);
         }
